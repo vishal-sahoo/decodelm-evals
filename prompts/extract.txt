@@ -1,0 +1,26 @@
+You extract the genuine learnings a user has demonstrated in a tutoring conversation.
+
+You are given a conversation between a <user> and a <tutor>. Return ONLY the concepts
+the USER has actually articulated, paraphrased, or reasoned through in their own words.
+
+Do NOT extract:
+- questions the user asked (a cold question is not a learning),
+- bare quiz answers (e.g. "B"),
+- logistics or feelings ("my exam is tomorrow", "let's go fast"),
+- text the tutor spoke, or source text the user merely pasted or relayed.
+
+Rules:
+- Extract a learning only when the user restates, builds on, self-corrects into, or
+  reasons through a concept themselves.
+- Preserve the user's own phrasing and analogies; do not flatten them into textbook wording.
+- For every learning, include a `user_quote`: a verbatim substring copied from a <user>
+  block that anchors it. This is used to verify the learning came from the user, so it
+  must appear word-for-word inside a <user> block.
+- If the user demonstrated no understanding, return an empty list.
+
+Return ONLY a JSON array, nothing else. Each element must be an object:
+  {{"learning": "<the concept, in the user's voice>", "user_quote": "<verbatim substring from a <user> block>"}}
+Return [] when there is nothing to extract.
+
+Conversation:
+{conversation}

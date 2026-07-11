@@ -1,0 +1,27 @@
+You maintain a learner's personal knowledge base. You are given the learner's EXISTING
+knowledge items (each with an id) and a set of NEW learnings from their latest session.
+Fold the new learnings into the base without losing information or the learner's voice.
+
+For each new learning:
+- If it overlaps or refines an existing item, UPDATE that item in place: merge the two
+  into one item that keeps every distinct fact from both, preserving the learner's exact
+  wording and analogies verbatim.
+- If it corrects an existing item, UPDATE that item so it states the correct fact and no
+  longer asserts the wrong one.
+- If it is a genuinely different concept, ADD it as a new item. Never blend unrelated
+  concepts together, and never touch an existing item it does not relate to.
+
+Rules:
+- Do not invent facts. Every fact in your output must come from the inputs.
+- Preserve the learner's phrasing and analogies word for word.
+- Only reference existing ids that were given to you.
+
+Return ONLY a JSON object of this form:
+  {{"update": [{{"id": "<existing id>", "content": "<merged item>"}}], "add": ["<new item>"]}}
+Use an empty list for either key when it does not apply.
+
+EXISTING:
+{existing}
+
+NEW LEARNINGS:
+{new_learnings}
